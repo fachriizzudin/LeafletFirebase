@@ -44,15 +44,12 @@
   #kategori{
     text-align: center;
     text-align-last: center;
-    z-index: 1;
-    position: absolute;
-    top: 0;
+ 
     height: 5vh;
     width:100%;
   }
 
   #container {
-    margin-top: 5vh;
     height: -moz-calc(100vh - (5vh));
     height: -webkit-calc(100vh - (5vh));
     height: calc(100vh - (5vh));
