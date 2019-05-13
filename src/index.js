@@ -1,10 +1,11 @@
 
     
     import L from 'leaflet';
-    import 'leaflet/dist/leaflet.css';
-    import './style.css';
+    import './style.scss';
     import { jalan } from './jalan.js'
-   
+
+
+ 
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -52,9 +53,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // Basemap
         map = L.map('map').setView([pusat.lat, pusat.lng], 18);
         L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            attribution: '&copy; <a href="#">GoogleMaps</a> contributors'
+            attribution: '&copy; <a href="#">GoogleMaps</a> contributors',
+            zoomControl: true
         }).addTo(map);
-    
+        map.zoomControl.setPosition('bottomright');
+
         // Ambil data jalan
         
         
@@ -126,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
     
         // Legenda
-        var legend = L.control({position: 'bottomright'});
+        var legend = L.control({position: 'bottomleft'});
     
         legend.onAdd = function (map) {
     
@@ -151,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         legend.addTo(map);
         
         // Info datanya
-        var info = L.control();
+        var info = L.control({position: 'topright'});
     
         info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
@@ -201,13 +204,16 @@ document.addEventListener("DOMContentLoaded", function() {
                         jalan.features[16].properties.var = doc.data().penghulu
             
                         buildMap(pusat,jalan)
+        })
+        .finally(() => {
+            console.log('syudahhh');
+            
         });      
     })
 
     buildMap(pusat,jalan)
+    // taruh kode di atas
 });
-
-
 
 
 
