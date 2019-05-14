@@ -639,6 +639,33 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-right-color: #fff;
 	}
 
+@keyframes spinner-line-fade-more {
+  0%, 100% {
+    opacity: 0; /* minimum opacity */
+  }
+  1% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-line-fade-quick {
+  0%, 39%, 100% {
+    opacity: 0.25; /* minimum opacity */
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinner-line-fade-default {
+  0%, 100% {
+    opacity: 0.22; /* minimum opacity */
+  }
+  1% {
+    opacity: 1;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -646,8 +673,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   font-family: Arial, Helvetica, sans-serif; }
 
 #mapid {
-  height: 100px;
-  width: 100px; }
+  height: 100%;
+  width: 100%; }
 
 .info {
   padding: 6px 8px;
@@ -673,15 +700,24 @@ svg.leaflet-image-layer.leaflet-interactive path {
   margin-right: 8px;
   opacity: 0.7; }
 
-#kategori {
-  text-align: center;
-  text-align-last: center;
-  height: 5vh;
-  width: 100%; }
-
 #container {
-  height: -moz-calc(100vh - (5vh));
-  height: -webkit-calc(100vh - (5vh));
-  height: calc(100vh - (5vh));
+  height: 100vh;
   width: 100vw; }
+
+select#kategori {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-user-select: none;
+  background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  background-position: 97% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 130px; }
 
