@@ -99,7 +99,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         sidebar.addPanel({
             id: 'Home',
             tab: '<i class="fa fa-info"></i>',
-            title: '<p style="font-family:Raleway, sans-serif;">SIG Kriminalitas Polstat STIS</p>',
+            title: '<p style="font-family:Raleway, sans-serif;">SIG Kriminalitas Sekitar Polstat STIS</p>',
             pane: '<p style = "font-family:Raleway, sans-serif;">Sistem ini menggunakan teknologi leaflet.js untuk menampilkan peta dengan segala atributnya dan menggunakan google firestore sebagai cloud storage</p> <br> <p style = "font-family:Raleway, sans-serif">Data yang ditampilkan banyaknya kejadian per Jalan selama 3 tahun terakhir. Kejadian tidak hanya terjadi tepat di Jalan, namun bisa rumah tinggal atau tempat yang alamatnya berada di jalan tersebut</p>',
         });
 
@@ -227,7 +227,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         };
 
         info.update = function (props) {
-            this._div.innerHTML = '<h4 style = "font-family:Raleway,sans-serif">Data Kriminalitas</h4>' + (props ?
+            this._div.innerHTML = '<h4 style = "font-family:Raleway,sans-serif">Data Banyaknya Kejadian Kriminalitas</h4>' + (props ?
                 '<b>' + props.var + ' </b><br />' + props.nama_jalan + ''
                 : '<p style = "font-family:Raleway,sans-serif">Sekitar Polstat STIS</p>');
         };
