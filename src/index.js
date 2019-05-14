@@ -80,9 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         map = L.map('map').setView([pusat.lat, pusat.lng], 18);
         L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             attribution: '&copy; <a href="#">GoogleMaps</a> contributors',
-            zoomControl: true
         }).addTo(map);
-        map.zoomControl.setPosition('bottomright');
 
         // Ambil data jalan
 
@@ -155,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // Legenda
-        var legend = L.control({ position: 'bottomleft' });
+        var legend = L.control({ position: 'bottomright' });
 
         legend.onAdd = function (map) {
 
