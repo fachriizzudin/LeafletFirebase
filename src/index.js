@@ -3,7 +3,7 @@
 import L from 'leaflet';
 import './style.scss';
 import { jalan } from './jalan.js'
-import { Spinner } from 'spin.js';
+import { Spinner } from 'spin.js/spin';
 // import './L.Control.Sidebar'
 import './leaflet-sidebar'
 // import '@fortawesome/fontawesome-free'
@@ -27,16 +27,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const db = firebase.firestore();
 
-
-
     var opts = {
-        lines: 13, // The number of lines to draw
-        length: 38, // The length of each line
-        width: 17, // The line thickness
-        radius: 45, // The radius of the inner circle
-        scale: 1, // Scales overall size of the spinner
+        lines: 11, // The number of lines to draw
+        length: 15, // The length of each line
+        width: 7, // The line thickness
+        radius: 20, // The radius of the inner circle
+        scale: 0.55, // Scales overall size of the spinner
         corners: 1, // Corner roundness (0..1)
-        color: '#ffffff', // CSS color or array of colors
+        color: '#000000', // CSS color or array of colors
         fadeColor: 'transparent', // CSS color or array of colors
         speed: 1, // Rounds per second
         rotate: 0, // The rotation offset
@@ -94,15 +92,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // add panels dynamically to the sidebar
 
         sidebar.addPanel({
-            id:   'Home',
-            tab:  '<i class="fa fa-info"></i>',
+            id: 'Home',
+            tab: '<i class="fa fa-info"></i>',
             title: 'SIG Kriminalitas Polstat STIS',
             pane: '<p>Sistem ini menggunakan teknologi leaflet.js untuk menampilkan peta dengan segala atributnya dan menggunakan google firestore sebagai cloud storage</p>',
         });
 
         sidebar.addPanel({
-            id:   'Profile',
-            tab:  '<i class="fa fa-user"></i>',
+            id: 'Profile',
+            tab: '<i class="fa fa-user"></i>',
             title: 'Developers',
             pane: '<p>Adalard Yusuf Kamarastha, Fachri Izzudin Lazuardi, Luqman Ismail Abdurrahim, Rahmat Ramadhan, Rozan Fikri</p>',
         });
@@ -231,9 +229,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         info.addTo(map);
 
 
-
-
-
         var dropdown = L.control({ position: 'topright' });
         dropdown.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
@@ -259,11 +254,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
             var docRef = db.collection("kriminalitas").doc(id.toString());
+
+
             var spinner = new Spinner(opts).spin(target);
+
+
 
             docRef.get().then(doc => {
                 document.getElementById('container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
-
 
 
                 jalan.features[0].properties.var = doc.data().saabun
