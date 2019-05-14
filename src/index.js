@@ -238,7 +238,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         var dropdown = L.control({ position: 'topright' });
         dropdown.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
-            div.innerHTML = '<select id="kategori" style = "font-family:Raleway, sans-serif"><option value="-1" style = "font-family:Raleway, sans-serif">Pilih Kategori</option><option value="0" style = "font-family:Raleway, sans-serif">Semua</option><option value="1" style = "font-family:Raleway, sans-serif">Pencurian</option><option value="2" style = "font-family:Raleway, sans-serif">Penipuan</option><option value="3" style = "font-family:Raleway, sans-serif">Pemalakan</option><option value="4 style = "font-family:Raleway, sans-serif">Kekerasan</option><option value="5" style = "font-family:Raleway, sans-serif">Asusila</option></select>';
+            div.innerHTML = '<select id="kategori" style = "font-family:Raleway, sans-serif"><option value="-1" style = "font-family:Raleway, sans-serif">Pilih Kategori</option><option value="0" style = "font-family:Raleway, sans-serif">Semua</option><option value="1" style = "font-family:Raleway, sans-serif">Pencurian</option><option value="2" style = "font-family:Raleway, sans-serif">Penipuan</option><option value="3" style = "font-family:Raleway, sans-serif">Pemalakan</option><option value="4" style = "font-family:Raleway, sans-serif">Kekerasan</option><option value="5" style = "font-family:Raleway, sans-serif">Asusila</option></select>';
             div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
             return div;
         };
