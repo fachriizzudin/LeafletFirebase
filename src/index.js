@@ -3,16 +3,13 @@
 import L from 'leaflet';
 import './style.scss';
 import { jalan } from './jalan.js'
-import {Spinner} from 'spin.js';
+import { Spinner } from 'spin.js';
 // import './L.Control.Sidebar'
 import './leaflet-sidebar'
 // import '@fortawesome/fontawesome-free'
 
 
-document.addEventListener("DOMContentLoaded", function () {
-
-
-
+window.addEventListener('DOMContentLoaded', (event) => {
     // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyBmo1IBULQht8jVo3gTDaZv0YnSWo4JVSY",
@@ -51,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         left: '50%', // Left position relative to parent
         shadow: '0 0 1px transparent', // Box-shadow for the lines
         position: 'absolute' // Element positioning
-      };
-      
-      var target = document.getElementById('foo');
+    };
+
+    var target = document.getElementById('foo');
 
     // Icon
     delete L.Icon.Default.prototype._getIconUrl;
@@ -70,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    let map;
+
     let dropdownValue = -1;
 
     function buildMap(pusat, jalan) {
@@ -79,15 +76,42 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
 
         // Basemap
-        map = L.map('map').setView([pusat.lat, pusat.lng], 18);
+        var map = L.map('map').setView([pusat.lat, pusat.lng], 18);
         L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             attribution: '&copy; <a href="#">GoogleMaps</a> contributors',
         }).addTo(map);
 
-        map.removeControl( map.zoomControl ); 
+        map.removeControl(map.zoomControl);
 
-       
 
+        var sidebar = L.control.sidebar({
+            autopan: false,       // whether to maintain the centered map point when opening the sidebar
+            closeButton: true,    // whether t add a close button to the panes
+            container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
+            position: 'left',     // left or right
+        }).addTo(map);
+
+        // add panels dynamically to the sidebar
+
+        sidebar.addPanel({
+            id:   'Home',
+            tab:  '<i class="fa fa-info"></i>',
+            title: 'SIG Kriminalitas Polstat STIS',
+            pane: '<p>Sistem ini menggunakan teknologi leaflet.js untuk menampilkan peta dengan segala atributnya dan menggunakan google firestore sebagai cloud storage</p>',
+        });
+
+        sidebar.addPanel({
+            id:   'Profile',
+            tab:  '<i class="fa fa-user"></i>',
+            title: 'Developers',
+            pane: '<p>Adalard Yusuf Kamarastha, Fachri Izzudin Lazuardi, Luqman Ismail Abdurrahim, Rahmat Ramadhan, Rozan Fikri</p>',
+        });
+
+        sidebar.addPanel({
+            id: 'ghlink',
+            tab: '<i class="fa fa-github"></i>',
+            button: 'https://github.com/fachriizzudin/LeafletFirebase',
+        });
 
         // Vektor Jalan 
         var geojson = L.geoJSON(jalan, {
@@ -155,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
             info.update(layer.feature.properties);
         }
 
-        
+
 
         // Legenda
         var legend = L.control({ position: 'bottomright' });
@@ -185,8 +209,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // zoom control
         L.control.zoom({
-            position:'bottomright'
-       }).addTo(map);
+            position: 'bottomright'
+        }).addTo(map);
 
 
         // Info datanya
@@ -208,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-       
+
 
         var dropdown = L.control({ position: 'topright' });
         dropdown.onAdd = function (map) {
@@ -220,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         dropdown.addTo(map);
 
-        const dropdownButton = document.getElementById("kategori")
+        var dropdownButton = document.getElementById("kategori")
 
         // set nilai dropdown sesuai dengan niali terakhir yang dipilih
         dropdownButton.value = dropdownValue;
@@ -234,12 +258,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 return
             }
 
-            let docRef = db.collection("kriminalitas").doc(id.toString());
+            var docRef = db.collection("kriminalitas").doc(id.toString());
             var spinner = new Spinner(opts).spin(target);
 
             docRef.get().then(doc => {
                 document.getElementById('container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
-                
+
 
 
                 jalan.features[0].properties.var = doc.data().saabun
@@ -260,23 +284,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 jalan.features[15].properties.var = doc.data().hyahya
                 jalan.features[16].properties.var = doc.data().penghulu
                 buildMap(pusat, jalan)
-            }).finally(()=>{
+            }).finally(() => {
                 spinner.stop()
 
             });
 
         })
-
-        
-
-        // create the sidebar instance and add it to the map
-        var sidebar = L.control.sidebar({ container: 'sidebar' })
-            .addTo(map)
-            .open('home');
-
-            sidebar.close();
-           
-        
 
 
         // buildMap
@@ -286,9 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
     // taruh kode di atas
 });
-
-
 
