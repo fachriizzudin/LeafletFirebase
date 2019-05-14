@@ -74,7 +74,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
 
         // Basemap
-        var map = L.map('map').setView([pusat.lat, pusat.lng], 18);
+    
+        var map = L.map('map', {
+            minZoom: 0,
+            maxZoom: 18
+        }).setView([pusat.lat, pusat.lng], 17);
+        
         L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             attribution: '&copy; <a href="#">GoogleMaps</a> contributors',
         }).addTo(map);
@@ -94,21 +99,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
         sidebar.addPanel({
             id: 'Home',
             tab: '<i class="fa fa-info"></i>',
-            title: 'SIG Kriminalitas Polstat STIS',
-            pane: '<p>Sistem ini menggunakan teknologi leaflet.js untuk menampilkan peta dengan segala atributnya dan menggunakan google firestore sebagai cloud storage</p>',
+            title: '<p style="font-family:Raleway, sans-serif;">SIG Kriminalitas Polstat STIS</p>',
+            pane: '<p style = "font-family:Raleway, sans-serif;">Sistem ini menggunakan teknologi leaflet.js untuk menampilkan peta dengan segala atributnya dan menggunakan google firestore sebagai cloud storage</p> <br> <p style = "font-family:Raleway, sans-serif">Data yang ditampilkan banyaknya kejadian per Jalan selama 3 tahun terakhir. Kejadian tidak hanya terjadi tepat di Jalan, namun bisa rumah tinggal atau tempat yang alamatnya berada di jalan tersebut</p>',
         });
 
         sidebar.addPanel({
             id: 'Profile',
             tab: '<i class="fa fa-user"></i>',
-            title: 'Developers',
-            pane: '<p>Adalard Yusuf Kamarastha, Fachri Izzudin Lazuardi, Luqman Ismail Abdurrahim, Rahmat Ramadhan, Rozan Fikri</p>',
+            title: '<p style="font-family:Raleway, sans-serif;">Developers</p>',
+            pane: '<p style = "font-family:Raleway, sans-serif;">Adalard Yusuf Kamarastha (16.8963) <br> Fachri Izzudin Lazuardi (16.9109) <br> Luqman Ismail Abdurrahim (16.9241) <br> Rahmat Ramadhan (16.9370) <br> Rozan Fikri (16.9404)</p>',
         });
 
         sidebar.addPanel({
             id: 'ghlink',
             tab: '<i class="fa fa-github"></i>',
-            button: 'https://github.com/fachriizzudin/LeafletFirebase',
+            title: '<p style="font-family:Raleway, sans-serif;">Project Source</p>',
+            pane: '<p style = "font-family:Raleway, sans-serif;"><a href="https://github.com/fachriizzudin/LeafletFirebase" target="_blank"> - See this project on github!</a> <br> <a href="https://git.stis.ac.id/FacHr1/sig-uas" target="_blank"> - See also (deprecated) previous project</a> </p>',
         });
 
         // Vektor Jalan 
@@ -221,9 +227,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         };
 
         info.update = function (props) {
-            this._div.innerHTML = '<h4>Data Kriminalitas</h4>' + (props ?
+            this._div.innerHTML = '<h4 style = "font-family:Raleway,sans-serif">Data Kriminalitas</h4>' + (props ?
                 '<b>' + props.var + ' </b><br />' + props.nama_jalan + ''
-                : 'Sekitar Polstat STIS');
+                : '<p style = "font-family:Raleway,sans-serif">Sekitar Polstat STIS</p>');
         };
 
         info.addTo(map);
@@ -232,7 +238,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         var dropdown = L.control({ position: 'topright' });
         dropdown.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
-            div.innerHTML = '<select id="kategori"><option value="-1">Pilih Kategori</option><option value="0">Semua</option><option value="1">Pencurian</option><option value="2">Penipuan</option><option value="3">Pemalakan</option><option value="4">Kekerasan</option><option value="5">Asusila</option></select>';
+            div.innerHTML = '<select id="kategori" style = "font-family:Raleway, sans-serif"><option value="-1" style = "font-family:Raleway, sans-serif">Pilih Kategori</option><option value="0" style = "font-family:Raleway, sans-serif">Semua</option><option value="1" style = "font-family:Raleway, sans-serif">Pencurian</option><option value="2" style = "font-family:Raleway, sans-serif">Penipuan</option><option value="3" style = "font-family:Raleway, sans-serif">Pemalakan</option><option value="4 style = "font-family:Raleway, sans-serif">Kekerasan</option><option value="5" style = "font-family:Raleway, sans-serif">Asusila</option></select>';
             div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
             return div;
         };
