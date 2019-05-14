@@ -4,7 +4,9 @@ import L from 'leaflet';
 import './style.scss';
 import { jalan } from './jalan.js'
 import {Spinner} from 'spin.js';
-
+// import './L.Control.Sidebar'
+import './leaflet-sidebar'
+// import '@fortawesome/fontawesome-free'
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -82,7 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
             attribution: '&copy; <a href="#">GoogleMaps</a> contributors',
         }).addTo(map);
 
-        // Ambil data jalan
+        map.removeControl( map.zoomControl ); 
+
+       
 
 
         // Vektor Jalan 
@@ -151,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
             info.update(layer.feature.properties);
         }
 
+        
 
         // Legenda
         var legend = L.control({ position: 'bottomright' });
@@ -177,6 +182,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         legend.addTo(map);
 
+
+        // zoom control
+        L.control.zoom({
+            position:'bottomright'
+       }).addTo(map);
+
+
         // Info datanya
         var info = L.control({ position: 'topright' });
 
@@ -194,6 +206,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         info.addTo(map);
 
+
+
+       
 
         var dropdown = L.control({ position: 'topright' });
         dropdown.onAdd = function (map) {
@@ -252,7 +267,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         })
 
+        
 
+        // create the sidebar instance and add it to the map
+        var sidebar = L.control.sidebar({ container: 'sidebar' })
+            .addTo(map)
+            .open('home');
+
+            sidebar.close();
+           
+        
+
+
+        // buildMap
     }
 
     buildMap(pusat, jalan)
